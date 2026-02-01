@@ -1,5 +1,3 @@
-import React from "react";
-
 interface SectorCardProps {
     name: string;
     placeholder: string;

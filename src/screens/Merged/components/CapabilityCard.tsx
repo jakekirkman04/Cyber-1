@@ -1,4 +1,4 @@
-import React, { LucideIcon } from "lucide-react";
+import { LucideIcon } from "lucide-react";
 
 interface CapabilityCardProps {
     title: string;

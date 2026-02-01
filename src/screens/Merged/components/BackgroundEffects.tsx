@@ -1,5 +1,3 @@
-import React from "react";
-
 export const BackgroundEffects = (): JSX.Element => {
     return (
         <div className="fixed inset-0 pointer-events-none">
