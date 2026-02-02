@@ -14,6 +14,8 @@ import { MetricCard } from "./components/MetricCard";
 import { LeadCaptureModal } from "./components/LeadCaptureModal";
 import { MethodologyModal } from "./components/MethodologyModal";
 import { IndustryCaseStudyModal, caseStudies, CaseStudy } from "./components/IndustryCaseStudyModal";
+import { ROICalculatorModal } from "./components/ROICalculatorModal";
+import { HeroIllustration } from "./components/HeroIllustration";
 
 const navigationItems = [
     { label: "Home", href: "#hero" },
@@ -101,6 +103,7 @@ export const BusinessConsultant = (): JSX.Element => {
     const [methodologyModalOpen, setMethodologyModalOpen] = useState(false);
     const [caseStudyModalOpen, setCaseStudyModalOpen] = useState(false);
     const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
+    const [roiCalculatorOpen, setROICalculatorOpen] = useState(false);
 
     const heroAnimation = useScrollAnimation(0.2);
     const sectorsAnimation = useScrollAnimation(0.1);
@@ -156,6 +159,11 @@ export const BusinessConsultant = (): JSX.Element => {
 
     const handleCaseStudyToLead = () => {
         setCaseStudyModalOpen(false);
+        setTimeout(() => setLeadModalOpen(true), 150);
+    };
+
+    const handleROIToLead = () => {
+        setROICalculatorOpen(false);
         setTimeout(() => setLeadModalOpen(true), 150);
     };
 
@@ -256,6 +264,16 @@ export const BusinessConsultant = (): JSX.Element => {
                         </Button>
 
                         <Button
+                            onClick={() => setROICalculatorOpen(true)}
+                            className="inline-flex items-center justify-end gap-2.5 px-6 py-4 relative flex-[0_0_auto] rounded-lg h-auto border-none bg-transparent hover:bg-transparent before:content-[''] before:absolute before:inset-0 before:p-px before:rounded-lg before:[background:linear-gradient(135deg,rgba(245,158,11,1)_0%,rgba(251,191,36,1)_100%)] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude] before:z-[1] before:pointer-events-none focus:ring-2 focus:ring-amber-500/50 hover:scale-105 transition-transform"
+                            aria-label="Calculate your ROI"
+                        >
+                            <span className="relative flex items-center justify-center w-fit font-medium text-white text-sm tracking-widest uppercase text-center whitespace-nowrap">
+                                Calculate ROI
+                            </span>
+                        </Button>
+
+                        <Button
                             onClick={() => setLeadModalOpen(true)}
                             className="inline-flex items-center justify-end gap-2.5 px-6 py-4 relative flex-[0_0_auto] rounded-lg shadow-lg bg-green-600 hover:bg-green-700 hover:scale-105 transition-all h-auto border-none focus:ring-2 focus:ring-green-500/50"
                             aria-label="Schedule a strategy consultation"
@@ -297,14 +315,7 @@ export const BusinessConsultant = (): JSX.Element => {
                 <div className={`flex-1 relative hidden lg:block transition-all duration-1000 delay-300 ${heroAnimation.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
                     <div className="relative w-full max-w-[550px] mx-auto group">
                         <div className="absolute inset-0 bg-amber-500/20 blur-[100px] rounded-full group-hover:bg-amber-500/30 transition-colors duration-700 will-change-transform" />
-                        <img
-                            src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
-                            alt="Business strategy team collaboration"
-                            className="w-full h-auto rounded-2xl drop-shadow-[0_0_50px_rgba(245,158,11,0.2)] hover:scale-105 transition-transform duration-700 relative z-10 will-change-transform object-cover aspect-square"
-                            loading="eager"
-                            width="550"
-                            height="550"
-                        />
+                        <HeroIllustration className="w-full h-auto drop-shadow-[0_0_50px_rgba(245,158,11,0.2)] hover:scale-105 transition-transform duration-700 relative z-10 will-change-transform" />
                     </div>
                 </div>
             </section>
@@ -450,6 +461,12 @@ export const BusinessConsultant = (): JSX.Element => {
                 onClose={() => setCaseStudyModalOpen(false)}
                 caseStudy={selectedCaseStudy}
                 onBookConsultation={handleCaseStudyToLead}
+            />
+
+            <ROICalculatorModal
+                isOpen={roiCalculatorOpen}
+                onClose={() => setROICalculatorOpen(false)}
+                onScheduleConsultation={handleROIToLead}
             />
         </div>
     );

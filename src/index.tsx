@@ -10,10 +10,11 @@ createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<Merged />} />
-        <Route path="/business-consultant" element={<BusinessConsultant />} />
+        <Route path="/" element={<BusinessConsultant />} />
+        <Route path="/legacy" element={<Merged />} />
         <Route path="/old" element={<DesktopOld />} />
-        <Route path="/merged" element={<Navigate to="/" replace />} />
+        <Route path="/business-consultant" element={<Navigate to="/" replace />} />
+        <Route path="/merged" element={<Navigate to="/legacy" replace />} />
         <Route path="/landing" element={<Landing />} />
       </Routes>
     </Router>
