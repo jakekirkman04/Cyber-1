@@ -1,6 +1,6 @@
 import { Button } from "../../components/ui/button";
 import { Shield, Eye, Lock, Activity, Menu, X, TrendingDown, Clock, CheckCircle } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
 import { useAnimatedCounter } from "./hooks/useAnimatedCounter";
 import { Logo } from "./components/Logo";

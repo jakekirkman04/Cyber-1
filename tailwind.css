@@ -194,13 +194,14 @@
   html {
     @apply bg-[#0f0f0f];
     overflow-x: hidden;
-    overscroll-behavior: none;
+    overscroll-behavior-x: none;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-[#0f0f0f] text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
-    overscroll-behavior: none;
+    overscroll-behavior-x: none;
   }
 }
