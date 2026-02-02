@@ -30,22 +30,22 @@ const sectors = [
 const capabilities = [
     {
         title: "Infrastructure Hardening",
-        description: "Reduces lateral movement",
+        description: "Eliminates lateral movement paths through segmentation and network isolation. Restrict privilege boundaries to prevent attackers from moving between systems after initial compromise.",
         icon: Shield,
     },
     {
         title: "Application Security Reviews",
-        description: "Reduces exploitability",
+        description: "Identifies and remediates exploitable vulnerabilities in code and dependencies. Reduce your exposure window by discovering threats that could be weaponized against your infrastructure.",
         icon: Eye,
     },
     {
         title: "Access & Identity Controls",
-        description: "Reduces unauthorized access",
+        description: "Implements least-privilege authentication and role-based access policies. Prevent unauthorized account access and limit blast radius when credentials are compromised.",
         icon: Lock,
     },
     {
         title: "Monitoring & Detection",
-        description: "Reduces dwell time",
+        description: "Detects and alerts on suspicious activities in real time. Dramatically reduce mean time to detection (MTTD) and respond to threats before they spread across your infrastructure.",
         icon: Activity,
     },
 ];
@@ -163,15 +163,15 @@ export const Merged = (): JSX.Element => {
                 {/* Hero Content */}
                 <div className={`flex-1 text-center lg:text-left transition-all duration-1000 ${heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <div className="mb-8 text-sm font-medium text-[#bdf589] uppercase tracking-[0.2em] [font-family:'Space_Mono',Helvetica]">
-                        Security Architecture
+                        Attack Surface Reduction
                     </div>
 
                     <h1 className="[font-family:'Space_Mono',Helvetica] font-normal text-white text-5xl md:text-7xl lg:text-[80px] tracking-[-0.04em] leading-[1.1] mb-8">
-                        Cyber Security
+                        Reduce Risk, Accelerate Security
                     </h1>
 
                     <p className="text-lg md:text-xl text-white/70 mb-12 leading-relaxed [font-family:'Space_Mono',Helvetica] max-w-xl">
-                        Technical protection for cloud environments, APIs, internal tools, and data pipelines. Reducing risk through infrastructure hardening and continuous monitoring.
+                        Eliminate lateral movement paths, minimize exploitable surfaces, and detect threats faster. Infrastructure hardening that closes attack vectors before they become breaches.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center mb-20">
@@ -205,9 +205,9 @@ export const Merged = (): JSX.Element => {
 
                             <div className="pl-8 inline-flex flex-col items-start justify-center gap-[5px] relative border-l border-white/10">
                                 <p className="leading-relaxed [font-family:'Space_Mono',Helvetica] font-normal text-white/50 text-sm tracking-[0]">
-                                    Dedicated to safeguarding<br />
-                                    your digital assets with<br />
-                                    technical precision
+                                    Reducing attack surface<br />
+                                    and closing security gaps<br />
+                                    at enterprise scale
                                 </p>
                             </div>
                         </div>
@@ -231,8 +231,8 @@ export const Merged = (): JSX.Element => {
             <section id="sectors" ref={sectorsAnimation.ref} className="relative z-10 w-full py-32 px-8 bg-white/[0.02]">
                 <div className={`max-w-6xl mx-auto transition-all duration-1000 ${sectorsAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <SectionHeader
-                        title="Trusted in High-Risk Environments"
-                        description="Leading organizations across critical sectors depend on our infrastructure hardening and continuous monitoring to stay secure."
+                        title="Trusted by Enterprise Security Teams"
+                        description="Across finance, healthcare, SaaS, and infrastructure sectors, teams depend on our attack surface reduction to meet compliance requirements and operational security standards."
                     />
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -247,8 +247,8 @@ export const Merged = (): JSX.Element => {
             <section id="capabilities" ref={capabilitiesAnimation.ref} className="relative z-10 w-full py-32 px-8">
                 <div className={`max-w-6xl mx-auto transition-all duration-1000 ${capabilitiesAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <SectionHeader
-                        title="Our Capabilities"
-                        description="Every capability is framed around measurable risk reduction, not marketing promises. Technical precision driving real outcomes."
+                        title="Risk Mitigation Across Four Dimensions"
+                        description="Each capability targets a specific attack vector. Our approach eliminates lateral movement, reduces exploitability, prevents unauthorized access, and accelerates threat detection."
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -259,10 +259,10 @@ export const Merged = (): JSX.Element => {
 
                     <div className="mt-20 bg-white/5 border border-white/10 rounded-2xl p-12 text-center group hover:border-[#bdf589]/30 transition-colors">
                         <p className="text-white/50 text-base mb-4 [font-family:'Space_Mono',Helvetica] group-hover:text-white/80 transition-colors">
-                            Our approach focuses on technical precision and measurable outcomes.
+                            Every security control we implement is measured against specific risk metrics. No marketing claims—just infrastructure that works.
                         </p>
                         <p className="text-xl md:text-2xl text-white [font-family:'Space_Mono',Helvetica] font-bold">
-                            Risk reduction through clarity, not hype.
+                            Measurable risk reduction. Proven outcomes.
                         </p>
                     </div>
                 </div>
@@ -272,8 +272,8 @@ export const Merged = (): JSX.Element => {
             <section id="contact" ref={contactAnimation.ref} className="relative z-10 w-full py-32 px-8 bg-[#bdf589]/[0.02]">
                 <div className={`max-w-4xl mx-auto transition-all duration-1000 ${contactAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <SectionHeader
-                        title="Get In Touch"
-                        description="Ready to secure your infrastructure? Let's discuss how we can help protect your digital assets."
+                        title="Start Your Risk Assessment"
+                        description="Understand your current attack surface. We'll help identify where you're exposed and the fastest path to meaningful risk reduction."
                     />
                     <ContactForm />
                 </div>

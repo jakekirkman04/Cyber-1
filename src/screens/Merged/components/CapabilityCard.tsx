@@ -21,7 +21,7 @@ export const CapabilityCard = ({ title, description, icon: Icon, index }: Capabi
                     <h3 className="text-xl [font-family:'Space_Mono',Helvetica] font-normal text-white mb-2">
                         {title}
                     </h3>
-                    <p className="text-sm text-white/50 leading-relaxed [font-family:'Space_Mono',Helvetica]">
+                    <p className="text-sm text-white/50 leading-relaxed [font-family:'Space_Mono',Helvetica] group-hover:text-white/70 transition-colors">
                         {description}
                     </p>
                 </div>
