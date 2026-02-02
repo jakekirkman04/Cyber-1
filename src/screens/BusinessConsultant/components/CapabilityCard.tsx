@@ -10,7 +10,7 @@ interface CapabilityCardProps {
 export const CapabilityCard = ({ title, description, icon: Icon, index }: CapabilityCardProps): JSX.Element => {
     return (
         <div
-            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 hover:border-amber-500/50 hover:bg-white/15 hover:scale-[1.02] transition-all duration-300 cursor-pointer group"
+            className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-8 hover:border-amber-500/50 hover:bg-white/15 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer group"
             style={{ transitionDelay: `${index * 100}ms` }}
         >
             <div className="flex items-start gap-4">

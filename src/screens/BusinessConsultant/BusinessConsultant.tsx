@@ -1,5 +1,5 @@
 import { Button } from "../../components/ui/button";
-import { Target, TrendingUp, Users, BarChart3, Menu, X, Award, Clock, CheckCircle } from "lucide-react";
+import { Target, TrendingUp, DollarSign, Compass, Menu, X, Award, Clock } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useScrollAnimation } from "./hooks/useScrollAnimation";
 import { useAnimatedCounter } from "./hooks/useAnimatedCounter";
@@ -9,9 +9,11 @@ import { StatItem } from "./components/StatItem";
 import { SectorCard } from "./components/SectorCard";
 import { CapabilityCard } from "./components/CapabilityCard";
 import { SectionHeader } from "./components/SectionHeader";
-import { ContactForm } from "./components/ContactForm";
 import { TestimonialCard } from "./components/TestimonialCard";
 import { MetricCard } from "./components/MetricCard";
+import { LeadCaptureModal } from "./components/LeadCaptureModal";
+import { MethodologyModal } from "./components/MethodologyModal";
+import { IndustryCaseStudyModal, caseStudies, CaseStudy } from "./components/IndustryCaseStudyModal";
 
 const navigationItems = [
     { label: "Home", href: "#hero" },
@@ -21,34 +23,34 @@ const navigationItems = [
 ];
 
 const sectors = [
-    { name: "Private Equity", placeholder: "PE" },
+    { name: "Retail", placeholder: "RTL" },
     { name: "Manufacturing", placeholder: "MFG" },
-    { name: "Technology", placeholder: "TECH" },
-    { name: "Healthcare", placeholder: "HLT" },
-    { name: "Financial Services", placeholder: "FIN" },
-    { name: "Consumer Goods", placeholder: "CPG" },
+    { name: "Tech", placeholder: "TECH" },
+    { name: "Real Estate", placeholder: "RE" },
+    { name: "Professional Services", placeholder: "PRO" },
+    { name: "Hospitality", placeholder: "HSP" },
 ];
 
 const capabilities = [
     {
-        title: "Strategic Growth Planning",
-        description: "Identify untapped market opportunities and build execution roadmaps that drive sustainable revenue growth. Transform strategic vision into measurable quarterly milestones that keep your leadership team aligned and accountable.",
+        title: "Strategic Planning",
+        description: "Define your path to market dominance with data-driven growth strategies. We identify high-impact opportunities that drive EBITDA expansion and position your business for sustainable competitive advantage.",
         icon: Target,
     },
     {
+        title: "Financial Optimization",
+        description: "Maximize profitability through rigorous financial analysis and restructuring. From working capital optimization to cost structure redesign, we unlock capital efficiency across your organization.",
+        icon: DollarSign,
+    },
+    {
         title: "Operational Excellence",
-        description: "Streamline workflows, eliminate inefficiencies, and optimize resource allocation across your organization. Implement proven methodologies that reduce costs while improving output quality and employee engagement.",
+        description: "Transform operations into a competitive weapon. We implement lean methodologies, automate key processes, and build operational infrastructure that scales with your growth ambitions.",
         icon: TrendingUp,
     },
     {
-        title: "Leadership Development",
-        description: "Build high-performing executive teams equipped to navigate complexity and drive change. Develop succession pipelines and cultivate the leadership capabilities your organization needs for long-term success.",
-        icon: Users,
-    },
-    {
-        title: "Performance Analytics",
-        description: "Transform data into actionable insights that inform critical business decisions. Establish KPI frameworks and dashboards that give leadership real-time visibility into what's working and what needs attention.",
-        icon: BarChart3,
+        title: "Market Expansion",
+        description: "Accelerate growth into new markets with reduced risk. Our proven frameworks help you identify target segments, develop go-to-market strategies, and build the capabilities needed for successful expansion.",
+        icon: Compass,
     },
 ];
 
@@ -75,18 +77,18 @@ const testimonials = [
 
 const metrics = [
     {
-        metric: "47%",
-        label: "Average revenue growth within 18 months",
+        metric: "85%",
+        label: "Average revenue growth",
         icon: TrendingUp
     },
     {
-        metric: "30%",
-        label: "Operational cost reduction achieved",
+        metric: "65%",
+        label: "Operational cost reduction",
         icon: Clock
     },
     {
-        metric: "92%",
-        label: "Client retention and referral rate",
+        metric: "95%",
+        label: "Client retention rate",
         icon: Award
     }
 ];
@@ -95,14 +97,19 @@ export const BusinessConsultant = (): JSX.Element => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [scrollY, setScrollY] = useState(0);
+    const [leadModalOpen, setLeadModalOpen] = useState(false);
+    const [methodologyModalOpen, setMethodologyModalOpen] = useState(false);
+    const [caseStudyModalOpen, setCaseStudyModalOpen] = useState(false);
+    const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudy | null>(null);
 
     const heroAnimation = useScrollAnimation(0.2);
     const sectorsAnimation = useScrollAnimation(0.1);
     const capabilitiesAnimation = useScrollAnimation(0.1);
     const contactAnimation = useScrollAnimation(0.1);
 
-    const clientCount = useAnimatedCounter(340, 2000, heroAnimation.isVisible);
-    const yearsCount = useAnimatedCounter(25, 2000, heroAnimation.isVisible);
+    const revenueGrowth = useAnimatedCounter(85, 2000, heroAnimation.isVisible);
+    const costReduction = useAnimatedCounter(65, 2000, heroAnimation.isVisible);
+    const clientRetention = useAnimatedCounter(95, 2000, heroAnimation.isVisible);
 
     const rafId = useRef<number | null>(null);
 
@@ -132,6 +139,24 @@ export const BusinessConsultant = (): JSX.Element => {
             element.scrollIntoView({ behavior: "smooth" });
         }
         setMobileMenuOpen(false);
+    };
+
+    const handleSectorClick = (sectorName: string) => {
+        const caseStudy = caseStudies[sectorName];
+        if (caseStudy) {
+            setSelectedCaseStudy(caseStudy);
+            setCaseStudyModalOpen(true);
+        }
+    };
+
+    const handleMethodologyToLead = () => {
+        setMethodologyModalOpen(false);
+        setTimeout(() => setLeadModalOpen(true), 150);
+    };
+
+    const handleCaseStudyToLead = () => {
+        setCaseStudyModalOpen(false);
+        setTimeout(() => setLeadModalOpen(true), 150);
     };
 
     return (
@@ -173,7 +198,7 @@ export const BusinessConsultant = (): JSX.Element => {
 
                     <Button
                         variant="outline"
-                        onClick={() => scrollToSection("#contact")}
+                        onClick={() => setLeadModalOpen(true)}
                         className="hidden md:inline-flex items-center justify-end gap-2.5 p-2.5 relative flex-[0_0_auto] rounded-lg border-none bg-transparent hover:bg-transparent before:content-[''] before:absolute before:inset-0 before:p-px before:rounded-lg before:[background:linear-gradient(135deg,rgba(245,158,11,1)_0%,rgba(100,116,139,1)_100%)] before:[-webkit-mask:linear-gradient(#fff_0_0)_content-box,linear-gradient(#fff_0_0)] before:[-webkit-mask-composite:xor] before:[mask-composite:exclude] before:z-[1] before:pointer-events-none focus:ring-2 focus:ring-amber-500/50 hover:scale-105 transition-transform"
                         aria-label="Contact Thorne Advisory"
                     >
@@ -195,8 +220,8 @@ export const BusinessConsultant = (): JSX.Element => {
                             </button>
                         ))}
                         <button
-                            onClick={() => scrollToSection("#contact")}
-                            className="mt-8 w-full py-5 px-8 rounded-lg bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 font-medium text-white text-xl uppercase tracking-widest border-none cursor-pointer hover:scale-[1.02] transition-transform"
+                            onClick={() => { setMobileMenuOpen(false); setLeadModalOpen(true); }}
+                            className="mt-8 w-full py-5 px-8 rounded-lg bg-green-600 font-medium text-white text-xl uppercase tracking-widest border-none cursor-pointer hover:scale-[1.02] transition-transform"
                         >
                             Contact Us
                         </button>
@@ -207,32 +232,32 @@ export const BusinessConsultant = (): JSX.Element => {
             <section id="hero" ref={heroAnimation.ref} className="relative z-10 flex flex-col lg:flex-row items-center justify-center min-h-screen px-8 pt-32 pb-16 gap-12 max-w-[1280px] mx-auto">
                 <div className={`flex-1 text-center lg:text-left transition-all duration-1000 ${heroAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <div className="mb-8 text-sm font-medium uppercase tracking-widest bg-gradient-to-r from-amber-400 to-yellow-500 bg-clip-text text-transparent">
-                        Strategic Business Advisory
+                        Strategic Business Growth
                     </div>
 
                     <h1 className="font-bold text-white text-[3.75rem] md:text-7xl lg:text-[80px] tracking-tighter leading-[1.1] mb-8">
-                        Accelerate Growth, Maximize Value
+                        Transform Your Business. Accelerate Growth.
                     </h1>
 
-                    <p className="text-lg text-slate-600 mb-12 leading-relaxed max-w-xl">
-                        Transform strategic challenges into competitive advantages. We partner with leadership teams to unlock operational excellence, drive sustainable growth, and build organizations that outperform their markets.
+                    <p className="text-lg text-slate-400 mb-12 leading-relaxed max-w-xl">
+                        Partner with executives who have driven billions in enterprise value. We deliver measurable outcomes through strategic planning, operational excellence, and market expansion.
                     </p>
 
-                    <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center mb-20">
+                    <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center mb-16">
                         <Button
                             variant="ghost"
-                            onClick={() => scrollToSection("#capabilities")}
+                            onClick={() => setMethodologyModalOpen(true)}
                             className="inline-flex items-center justify-end gap-2.5 p-2.5 relative flex-[0_0_auto] rounded-lg h-auto hover:bg-white/5 transition-colors focus:ring-2 focus:ring-amber-500/50"
-                            aria-label="Explore our services"
+                            aria-label="Learn our process"
                         >
                             <span className="relative flex items-center justify-center w-fit font-medium text-white text-sm tracking-widest uppercase text-center whitespace-nowrap">
-                                Explore Services
+                                Learn Our Process
                             </span>
                         </Button>
 
                         <Button
-                            onClick={() => scrollToSection("#contact")}
-                            className="inline-flex items-center justify-end gap-2.5 px-6 py-4 relative flex-[0_0_auto] rounded-lg shadow-lg bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-600 hover:via-yellow-600 hover:to-amber-700 hover:scale-105 transition-all h-auto border-none focus:ring-2 focus:ring-amber-500/50"
+                            onClick={() => setLeadModalOpen(true)}
+                            className="inline-flex items-center justify-end gap-2.5 px-6 py-4 relative flex-[0_0_auto] rounded-lg shadow-lg bg-green-600 hover:bg-green-700 hover:scale-105 transition-all h-auto border-none focus:ring-2 focus:ring-green-500/50"
                             aria-label="Schedule a strategy consultation"
                         >
                             <span className="relative flex items-center justify-center w-fit font-medium text-white text-sm tracking-widest uppercase text-center whitespace-nowrap">
@@ -241,17 +266,29 @@ export const BusinessConsultant = (): JSX.Element => {
                         </Button>
                     </div>
 
-                    <div className="flex flex-wrap items-center justify-center lg:justify-start gap-12">
-                        <div className="inline-flex items-center relative gap-8">
-                            <StatItem value={`${clientCount}+`} label="Clients" padding="pl-1.5 pr-8" borderRight="border-r border-amber-500" />
-                            <StatItem value={`${yearsCount}+`} label="Years" padding="px-0" />
-
-                            <div className="pl-8 inline-flex flex-col items-start justify-center gap-1 relative border-l border-white/10">
-                                <p className="leading-relaxed text-slate-600 text-lg">
-                                    Executive partnerships<br />
-                                    delivering measurable<br />
-                                    business transformation
-                                </p>
+                    <div className="grid grid-cols-3 gap-6 max-w-lg lg:max-w-none">
+                        <div className="text-center lg:text-left">
+                            <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                                {revenueGrowth}%
+                            </div>
+                            <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider">
+                                Avg Revenue Growth
+                            </div>
+                        </div>
+                        <div className="text-center lg:text-left border-l border-white/10 pl-6">
+                            <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                                {costReduction}%
+                            </div>
+                            <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider">
+                                Cost Reduction
+                            </div>
+                        </div>
+                        <div className="text-center lg:text-left border-l border-white/10 pl-6">
+                            <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                                {clientRetention}%
+                            </div>
+                            <div className="text-xs md:text-sm text-slate-400 uppercase tracking-wider">
+                                Client Retention
                             </div>
                         </div>
                     </div>
@@ -275,13 +312,17 @@ export const BusinessConsultant = (): JSX.Element => {
             <section id="sectors" ref={sectorsAnimation.ref} className="relative z-10 w-full py-32 px-8 bg-white/[0.02]">
                 <div className={`max-w-6xl mx-auto transition-all duration-1000 ${sectorsAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <SectionHeader
-                        title="Trusted Across Industries"
-                        description="From private equity portfolio companies to Fortune 500 enterprises, leadership teams rely on Thorne Advisory to navigate complexity, accelerate growth, and build lasting competitive advantage."
+                        title="Industry Expertise"
+                        description="Deep sector knowledge combined with proven methodologies. Click on any industry to explore our case studies and see real results we've delivered."
                     />
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mb-20">
                         {sectors.map((sector) => (
-                            <SectorCard key={sector.name} {...sector} />
+                            <SectorCard
+                                key={sector.name}
+                                {...sector}
+                                onClick={() => handleSectorClick(sector.name)}
+                            />
                         ))}
                     </div>
 
@@ -289,7 +330,7 @@ export const BusinessConsultant = (): JSX.Element => {
                         <h3 className="text-[2.25rem] font-semibold text-white text-center mb-4 leading-tight">
                             Proven Impact
                         </h3>
-                        <p className="text-slate-600 text-lg text-center mb-12 max-w-2xl mx-auto">
+                        <p className="text-slate-400 text-lg text-center mb-12 max-w-2xl mx-auto">
                             Real results from real engagements. Our track record speaks through the success of our clients.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -303,7 +344,7 @@ export const BusinessConsultant = (): JSX.Element => {
                         <h3 className="text-[2.25rem] font-semibold text-white text-center mb-4 leading-tight">
                             What Leaders Say
                         </h3>
-                        <p className="text-slate-600 text-lg text-center mb-12 max-w-2xl mx-auto">
+                        <p className="text-slate-400 text-lg text-center mb-12 max-w-2xl mx-auto">
                             Hear directly from CEOs and executives who have partnered with Thorne Advisory.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -319,7 +360,7 @@ export const BusinessConsultant = (): JSX.Element => {
                 <div className={`max-w-6xl mx-auto transition-all duration-1000 ${capabilitiesAnimation.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                     <SectionHeader
                         title="Four Pillars of Business Transformation"
-                        description="Comprehensive advisory services that address the full spectrum of growth challenges. From strategic planning to operational execution, we partner with you at every stage."
+                        description="Comprehensive advisory services focused on measurable business outcomes. From strategic planning to market expansion, we partner with you to drive EBITDA growth and lasting competitive advantage."
                     />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -329,7 +370,7 @@ export const BusinessConsultant = (): JSX.Element => {
                     </div>
 
                     <div className="mt-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-12 text-center group hover:border-amber-500/40 transition-colors">
-                        <p className="text-slate-600 text-lg mb-4 group-hover:text-slate-400 transition-colors">
+                        <p className="text-slate-400 text-lg mb-4 group-hover:text-slate-300 transition-colors">
                             Every recommendation we make is tied to measurable business outcomes. No theory, just results.
                         </p>
                         <p className="text-[2.25rem] font-semibold text-white leading-tight">
@@ -345,7 +386,22 @@ export const BusinessConsultant = (): JSX.Element => {
                         title="Start Your Growth Journey"
                         description="Schedule a confidential strategy session. We'll explore your business challenges, identify growth opportunities, and outline a path to accelerated performance."
                     />
-                    <ContactForm />
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-12 text-center">
+                        <h3 className="text-2xl font-semibold text-white mb-4">
+                            Ready to Transform Your Business?
+                        </h3>
+                        <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+                            Complete our brief qualification form and our team will reach out within 2 hours to schedule your strategy session.
+                        </p>
+                        <Button
+                            onClick={() => setLeadModalOpen(true)}
+                            className="inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-lg shadow-lg bg-green-600 hover:bg-green-700 hover:scale-105 transition-all h-auto border-none focus:ring-2 focus:ring-green-500/50"
+                        >
+                            <span className="text-sm font-medium uppercase tracking-widest text-white">
+                                Request Your Roadmap
+                            </span>
+                        </Button>
+                    </div>
                 </div>
             </section>
 
@@ -377,6 +433,24 @@ export const BusinessConsultant = (): JSX.Element => {
                     </div>
                 </div>
             </footer>
+
+            <LeadCaptureModal
+                isOpen={leadModalOpen}
+                onClose={() => setLeadModalOpen(false)}
+            />
+
+            <MethodologyModal
+                isOpen={methodologyModalOpen}
+                onClose={() => setMethodologyModalOpen(false)}
+                onBookAudit={handleMethodologyToLead}
+            />
+
+            <IndustryCaseStudyModal
+                isOpen={caseStudyModalOpen}
+                onClose={() => setCaseStudyModalOpen(false)}
+                caseStudy={selectedCaseStudy}
+                onBookConsultation={handleCaseStudyToLead}
+            />
         </div>
     );
 };
