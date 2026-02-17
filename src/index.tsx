@@ -5,6 +5,7 @@ import { Landing } from "./screens/Landing";
 import { DesktopOld } from "./screens/Old";
 import { Merged } from "./screens/Merged";
 import { BusinessConsultant } from "./screens/BusinessConsultant";
+import { GreenValley } from "./screens/GreenValley";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/business-consultant" element={<Navigate to="/" replace />} />
         <Route path="/merged" element={<Navigate to="/legacy" replace />} />
         <Route path="/landing" element={<Landing />} />
+        <Route path="/greenvalley" element={<GreenValley />} />
       </Routes>
     </Router>
   </StrictMode>,
