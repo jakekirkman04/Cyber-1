@@ -16,6 +16,7 @@ import { MethodologyModal } from "./components/MethodologyModal";
 import { IndustryCaseStudyModal, caseStudies, CaseStudy } from "./components/IndustryCaseStudyModal";
 import { ROICalculatorModal } from "./components/ROICalculatorModal";
 import { HeroIllustration } from "./components/HeroIllustration";
+import { PortfolioSlider } from "./components/PortfolioSlider";
 
 const navigationItems = [
     { label: "Home", href: "#hero" },
@@ -450,6 +451,8 @@ export const GreenValley = (): JSX.Element => {
                             ))}
                         </div>
                     </div>
+
+                    <PortfolioSlider />
                 </div>
             </section>
 
