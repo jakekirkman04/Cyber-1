@@ -1,3 +1,4 @@
+import "../tailwind.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
