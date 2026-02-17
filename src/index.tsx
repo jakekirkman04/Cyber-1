@@ -11,13 +11,13 @@ createRoot(document.getElementById("app") as HTMLElement).render(
   <StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<BusinessConsultant />} />
+        <Route path="/" element={<GreenValley />} />
         <Route path="/legacy" element={<Merged />} />
         <Route path="/old" element={<DesktopOld />} />
-        <Route path="/business-consultant" element={<Navigate to="/" replace />} />
+        <Route path="/business-consultant" element={<BusinessConsultant />} />
         <Route path="/merged" element={<Navigate to="/legacy" replace />} />
         <Route path="/landing" element={<Landing />} />
-        <Route path="/greenvalley" element={<GreenValley />} />
+        <Route path="/greenvalley" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   </StrictMode>,
