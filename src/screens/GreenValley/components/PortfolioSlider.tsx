@@ -28,7 +28,7 @@ const portfolioItems = [
         category: "Web Development",
     },
     {
-        image: "https://images.pexels.com/photos/38547/pexels-photo-38547.jpeg?auto=compress&cs=tinysrgb&w=800",
+        image: "https://images.pexels.com/photos/39284/macbook-apple-imac-computer-39284.jpeg?auto=compress&cs=tinysrgb&w=800",
         title: "Startup Landing Page",
         category: "Growth Strategy",
     },
